@@ -1,6 +1,6 @@
 BUILD_DIR_NAME=build
 
-all: build_submodule clean build
+all: clean build
 
 build_submodule:
 	make -C gnu-efi
