@@ -1,5 +1,5 @@
 .kdev4/
-Kernel-mdm-efi.kdev4
+*.kdev4
 
 build/
 
