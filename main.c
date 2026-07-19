@@ -5,11 +5,12 @@ EFI_STATUS
 EFIAPI
 efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 {
+
+  UINTN index;
+
   InitializeLib(ImageHandle, SystemTable);
-  Print(u"Hello, world from custom kernel!\n");
-  for (;;)
-  {
-    __asm__ volatile("hlt");
-  }
+  uefi_call_wrapper(SystemTable->ConOut->OutputString, 2, SystemTable->ConOut, u"Hello, from custom EFI app!\r\n");
+  uefi_call_wrapper(SystemTable->ConOut->OutputString, 2, SystemTable->ConOut, u"\r\n\r\n\r\nHit any key to exit\r\n");
+  uefi_call_wrapper(SystemTable->BootServices->WaitForEvent, 3, 1, &SystemTable->ConIn->WaitForKey, &index);
   return EFI_SUCCESS;
 }
